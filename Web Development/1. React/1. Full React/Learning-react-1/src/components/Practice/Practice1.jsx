@@ -1,7 +1,8 @@
 import React from "react";
 import { Items } from "./Items";
+import styles from "./Practice1.module.css";
 
-export const Practice1 = () => {
+export const Practice1 = ({ child }) => {
     const foodItem = ["Bread", "Butter", "Milk", "Vegetables"];
     // const foodItem = [];
 
@@ -12,7 +13,9 @@ export const Practice1 = () => {
 
     return (
         <div className="m-10">
-            <h1>Food Items</h1>
+            {child}
+
+            <h1 className={`${styles?.header1}`}>Food Items</h1>
 
             {/* Conditional rendering */}
             {/* {emptyMessage} */}

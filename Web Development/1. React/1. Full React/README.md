@@ -7,6 +7,11 @@ React is a library and eco-system provides good sense develpoment experience wit
 You know every technology comes into big picture and public attention must have some unique traits to provide that solves good-hard business problems. React has several briefly discussed below:
 1. React Virtual DOM
 
+
+## Updating values in the UI real-time
+React uses a solution called state, it fixes the reload issue everytime the UI update or adds new data. The state feature in React makes a webapp truly SPA (Single Page Application). Simple term, it re-render specific portion without even reloading.
+
+
 ## Some React extensions (for VS Code)
 1. html to JSX
 
@@ -38,7 +43,6 @@ const ChildComponent = () => (
 ```
 
 Shorthand for fragment
-
 ```jsx
 const ChildComponent = () => (
  <>
@@ -59,7 +63,7 @@ return (
 );
 ```
 
-## 'key' attribute or key prop
+## **```'key' attribute or key prop```**
 The key attribute or prop is a special attribute used by React. It helps React identify which items have changed, been added, or been removed within a list. It's common to include a key attribute for each rendered item.
 **key prop track if any item changes and re-render that particular UI**.
 
@@ -131,17 +135,68 @@ Conditional rendering in React is a technique where components render differentl
    }
    ```
 
-## **Props** in React
-Props (Short form of properties) are way to pass parent to child.
-
 ## **CSS Modules**
-CSS files in React are globally available throughout the project. This may lead to ambiguities (like repeating class names) and other difficulties with design. As a result, **CSS modules were introduced with a pattern stating that every component has its own CSS file**.
+CSS files in React are globally available throughout the project. This may lead to ambiguities (like repeating class names) and other difficulties with design. As a result, **CSS modules were introduced with a pattern stating that every component has its own CSS file**. To define a CSS module file follow this file naming:
 
-## Updating values in the UI real-time
-React uses a solution called state, it fixes the reload issue everytime the UI update or adds new data. The state feature in React makes a webapp truly SPA (Single Page Application). Simple term, it re-render specific portion without even reloading.
+```component_name.module.css```
+
+To use classes defined in a CSS module file we have to use object like notation.
+
+👉 See more in: **Practice1.jsx**
+
+### 🚀 Best practice - Optional chaining
+While accessing object properties using optional chaining operator (**?.**) consider a best practice. It is important because the property we're trying to access may not available, in this can it produce an error prone to bug. 
+
+
 
 ### **htmlFor** 
 The htmlFor attribute is used to associate a label with an input element.
+
+## **Props** in React 
+Props (Short form of properties) are way to pass parent to child.
+
+## **```Passing component as props (Children props)```**
+> We can easily import and use a component in another component, but as per react good practices one should use **children props** to do so with additional benefits.
+> 
+To pass a component as a prop in React, you can simply pass the component name as a value to the prop. Here's an example:
+
+```jsx
+import React from 'react';
+
+// Child component
+const ChildComponent = () => {
+  return <h2>Hello from ChildComponent!</h2>;
+};
+
+// Parent component
+const ParentComponent = ({ child }) => {
+  return (
+    <div>
+      <h1>Hello from ParentComponent!</h1>
+      {child}
+    </div>
+  );
+};
+
+// App component
+const App = () => {
+  return (
+    <div>
+      <ParentComponent child={<ChildComponent />} />
+    </div>
+  );
+};
+
+export default App;
+```
+
+In the example above, the `ChildComponent` is passed as a prop to the `ParentComponent` by wrapping it in curly braces and using the prop name `child`. Inside the `ParentComponent`, you can render the passed component by simply using `{child}`.
+
+Note that when passing a component as a prop, you need to use the component name without the JSX tags (`< >`).
+
+
+## **```Event Handling```**
+
 
 > # ```React Hooks```
 

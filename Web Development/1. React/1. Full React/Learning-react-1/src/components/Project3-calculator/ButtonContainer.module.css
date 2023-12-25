@@ -1,0 +1,21 @@
+.buttonsContainer {
+    /* border: 1px solid; */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-top: 5px;
+}
+
+.buttonsContainer > * {
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.buttonsContainer > button {
+    background-color: khaki;
+    font-weight: bolder;
+    width: 50px;
+}
