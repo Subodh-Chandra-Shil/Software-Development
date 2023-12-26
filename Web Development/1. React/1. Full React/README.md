@@ -1,25 +1,25 @@
 > # ```React```
-> 
-## Motivation
+
+## **```Motivation```**
 React is a library and eco-system provides good sense develpoment experience with richness of UI development lifecycle. It has the biggest community among UI development technology and continuously pushing the technology next level. Thus the market goest on "React" way.
 
-## Breakthrough of React
+## **```Breakthrough of React```**
 You know every technology comes into big picture and public attention must have some unique traits to provide that solves good-hard business problems. React has several briefly discussed below:
 1. React Virtual DOM
 
 
-## Updating values in the UI real-time
+## **```Updating values in the UI real-time```**
 React uses a solution called state, it fixes the reload issue everytime the UI update or adds new data. The state feature in React makes a webapp truly SPA (Single Page Application). Simple term, it re-render specific portion without even reloading.
 
 
-## Some React extensions (for VS Code)
+## **```Some React extensions (for VS Code)```**
 1. html to JSX
 
-## React Components
+## **```React Components```**
 - Components are reuseable function can be used throughout the project.
 - Compenents provide feature that maintains, **Similar in design or strcuture and different in data approach**.
 
-## React component naming rule
+## **```React component naming rule```**
 React এর component এর নাম অবশ্যই Capital letter দিয়ে শুরু করতে হবে বা pascale case follow করতে হবে ।
 
 ## React File System 
@@ -64,8 +64,21 @@ return (
 ```
 
 ## **```'key' attribute or key prop```**
-The key attribute or prop is a special attribute used by React. It helps React identify which items have changed, been added, or been removed within a list. It's common to include a key attribute for each rendered item.
+The key attribute or prop is a special attribute used by React. If the “key” attribute is present, React uses it as a way to identify an element of the same type among its siblings during re-renders. It helps React to identify which items have changed, been added, or been removed within a list. It's common to include a key attribute for each rendered item.
 **key prop track if any item changes and re-render that particular UI**.
+
+**Best practices**:
+1. You can create a function to generate unique keys/ids/numbers/strings and use that.
+2. You can make use of existing npm packages like uuid, uniqid, etc.
+3. You can also generate random number like new Date().getTime(); and prefix it with something from the item you're iterating to guarantee its uniqueness
+Lastly, I recommend using the unique ID you get from the database, If you get it.
+
+Study more: 
+1. https://stackoverflow.com/questions/39549424/how-to-create-unique-keys-for-react-elements
+2. https://bobbyhadz.com/blog/react-generate-unique-id
+
+
+
 
 ## **```Conditional Rendering```**
 Conditional rendering in React is a technique where components render differently based on certain conditions within your React components. This is achieved using JavaScript's conditional statements like if, &&, and ? : operators. There are several ways to perform conditional rendering in React:
@@ -135,7 +148,7 @@ Conditional rendering in React is a technique where components render differentl
    }
    ```
 
-## **CSS Modules**
+## **```CSS Modules```**
 CSS files in React are globally available throughout the project. This may lead to ambiguities (like repeating class names) and other difficulties with design. As a result, **CSS modules were introduced with a pattern stating that every component has its own CSS file**. To define a CSS module file follow this file naming:
 
 ```component_name.module.css```
@@ -148,11 +161,10 @@ To use classes defined in a CSS module file we have to use object like notation.
 While accessing object properties using optional chaining operator (**?.**) consider a best practice. It is important because the property we're trying to access may not available, in this can it produce an error prone to bug. 
 
 
-
 ### **htmlFor** 
 The htmlFor attribute is used to associate a label with an input element.
 
-## **Props** in React 
+## **```Props in React```**
 Props (Short form of properties) are way to pass parent to child.
 
 ## **```Passing component as props (Children props)```**
@@ -197,33 +209,50 @@ Note that when passing a component as a prop, you need to use the component name
 
 ## **```Event Handling```**
 
-
-> # ```React Hooks```
-
-Hooks in react are powerful feature that allows you to use state and other React features in functional components.
-
-### **useState** hook
-When we need to render on update or change a paritcular section in the website we have to use useState hook.
-
-### **useEffect** hook
-```javascript
-useEffect(() => {
-    /// your codes
-}, [dependencies]);
-```
-With useEffect a component re-render every time it's dependency changes. 
-
-> # ```Context API```
-
-### **"_redirects" file**
-
-The_redirects file is used to handle client-side routing in a single-page React application.
-
-> # ```React Event Handler```
+1. Avoid inline arrow functions in JSX for performance.
 
 &nbsp;
 
-> # **```Event bubbling```**
+**Bad practice**
+```jsx
+  <div>
+      <input
+          type="text"
+          className={`border p-1 ${styles.foodInput}`}
+          placeholder="Say Food Name.."
+          name=""
+          onChange={(e, foodname) =>
+              console.log(e.target.value, foodname)
+          }
+      />
+  </div>
+```
+
+**Good practice**: Rather define a function outside which takes care of event handling.
+```jsx
+    const handleFoodInput = (foodName, randomName) => (e) => {
+        console.log(`foodName is ${foodName}`);
+        console.log(`randomName is ${randomName}`);
+        console.log(e.target.value);
+    };
+
+    return (
+        <div>
+            <input
+                type="text"
+                className={`border p-1 ${styles.foodInput}`}
+                placeholder="Say Food Name.."
+                name=""
+                onChange={handleFoodInput("somename", "random")}
+            />
+        </div>
+    );
+```
+
+Read more: https://www.w3schools.com/react/react_events.asp
+
+
+## **```Event bubbling```**
 
 Event propagation is the process of an event moving up the DOM tree from the element where it occurred to its parent elements, and so on, until it reaches the top of the document. In React, event propagation works in the same way as it does in the DOM.
 
@@ -250,6 +279,33 @@ The best practice is to always use **```event.stopPropagation();```**
 
 &nbsp;
 
+
+> # ```React Hooks```
+
+Hooks in react are powerful feature that allows you to use state and other React features in functional components.
+
+### **useState** hook
+When we need to render on update or change a paritcular section in the website we have to use useState hook.
+
+### **useEffect** hook
+```javascript
+useEffect(() => {
+    /// your codes
+}, [dependencies]);
+```
+With useEffect a component re-render every time it's dependency changes. 
+
+> # ```Context API```
+
+### **"_redirects" file**
+
+The_redirects file is used to handle client-side routing in a single-page React application.
+
+> # ```React Event Handler```
+
+&nbsp;
+
+
 > # ```React Classnames library```
 
 You can reuse css classes by using this library additionally handle  classes with conditional rendering.
@@ -257,6 +313,11 @@ You can reuse css classes by using this library additionally handle  classes wit
 > # ```React Forms```
 
 The onsubmit should be called from forms.
+
+### **```input tag "name" attribute```**
+The name attribute in an input tag in React is used to identify the form field that gets get its value submitted with the form. It specifies the name for the input that's submitted with the form. But, Each input element within a form should have a unique name to avoid conflicts in submitted data.
+
+
 
 > # **```React TypeScript```**
 

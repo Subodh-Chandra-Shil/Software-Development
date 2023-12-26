@@ -1,6 +1,7 @@
 import React from "react";
 import { Items } from "./Items";
 import styles from "./Practice1.module.css";
+import { FoodInput } from "./FoodInput";
 
 export const Practice1 = ({ child }) => {
     const foodItem = ["Bread", "Butter", "Milk", "Vegetables"];
@@ -24,7 +25,8 @@ export const Practice1 = ({ child }) => {
                     Don't have any items to show
                 </h3>
             )}
-
+            
+            <FoodInput />
             <Items foodItem={foodItem} />
         </div>
     );
