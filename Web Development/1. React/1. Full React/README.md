@@ -19,6 +19,12 @@ React uses a solution called state, it fixes the reload issue everytime the UI u
 - Components are reuseable function can be used throughout the project.
 - Compenents provide feature that maintains, **Similar in design or strcuture and different in data approach**.
 
+### Good practices:
+When we create a component we should abide by these good practices:
+1. **Each Component in Its Own Folder**: For each component it should contain in a folder with same component name.
+2. The main component or parent component file should only contain logics, methods like data fetching methods, event handling methods, states or other important stuffs etc. It will only responsible for passing these logical data to the child components declared inside the same component folder. 
+3. All UI related work should be handled by child component files, these fill should not work around any logics for the UI. 
+
 ## **```React component naming rule```**
 React এর component এর নাম অবশ্যই Capital letter দিয়ে শুরু করতে হবে বা pascale case follow করতে হবে ।
 
@@ -206,6 +212,7 @@ In the example above, the `ChildComponent` is passed as a prop to the `ParentCom
 
 Note that when passing a component as a prop, you need to use the component name without the JSX tags (`< >`).
 
+&nbsp;
 
 ## **```Event Handling```**
 
@@ -280,14 +287,103 @@ The best practice is to always use **```event.stopPropagation();```**
 &nbsp;
 
 
+## **```Pass method as props```**
+
+Yes, we can define method in the child compoment itself and use any time. But receiving method via parent consider best practice, since **components that can perform different actions based on the passed function**. 
+
+&nbsp;
+
+> # **```React State Management```**
+
+### ```What is state?```
+State in React refers to the dynamic and interactive data that can change over time and affect the output of the render function on a special dependency change. 
+- State is local and private to the component.
+- State changes cause the component or specific part of a component to re-render.
+- To handle state in functional component 
+
+&nbsp;
+
+### **```Good practice```**
+We should never spoil or modify default state variable values. 
+
+```jsx
+const [foodItems, setFoodItems] = useState(["Salad", "Green Vegetable", "Roti"]);
+
+const onKeyDown = (event) => {
+  if (event.key === "Enter”) {
+      let newFoodItem = event.target.value;
+      let newltems = [...foodItems, newFoodItem];
+      setFoodItems(newltems);
+  }
+  
+  console. log("Food value entered is “ + newfFoodltenm);    
+};
+```
+In this code snippet, we're not updating the state variable, rather just adding existing and new values to a new variable and then updating in the state using useState second parameter method.
+
+
 > # ```React Hooks```
 
 Hooks in react are powerful feature that allows you to use state and other React features in functional components.
 
-### **useState** hook
-When we need to render on update or change a paritcular section in the website we have to use useState hook.
+> ### **```useState```** hook
+When we need to render on update or show new data in a paritcular section of a website we have to use useState hook.
 
-### **useEffect** hook
+> **The first parameter of the useState function represent the intial value, second parameter represents a method that is responsible for re-render or updating the component thus initial value or the first paremter of useState get updated and visible in the UI.**
+
+```jsx
+import React, { useState } from 'react';
+
+function Example() {
+  // Declare a new state variable, which we'll call "count"
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+
+export default Example;
+```
+
+- States are associated with events. To change a state an event needs to be triggered.  
+
+## **```Declaring state```**
+The decision to declare state in a component's closest parent or privately in the component itself largely depends on the specific requirements of your application. Both approaches have their own advantages and use cases.
+
+### 1. **Lifting state up or Declaring State in the Closest Parent**
+Lifting state up in React refers to the process of moving the state from a child component to its parent component. This may happen that an instance or any resource can be used by multiple components, so by declaring state in the parent level which contains multiple component can provide state to child components. By lifting the state up to their closest common parent component, all the child components can share the state.
+
+```jsx
+import React from "react";
+
+export default function App() {
+ const [todos, setTodos] = React.useState(["item 1", "item 2", "item 3"]);   
+   
+ return (
+   <>
+     <TodoCount todos={todos} />
+     <TodoList todos={todos} />
+     <AddTodo setTodos={setTodos} />
+   </>
+ );
+}
+```
+Here in the ```App.jsx``` component example, the todos array is used by two components, so it would be better declare the state in the App component which is the closest parent, rather declaring state privately. 
+
+
+### 2. **Declaring State Privately**
+Sometimes, it's better to keep the state private within a component. This is the case when state that is used exclusively within a specific component and doesn't need to be shared with other component. By keeping the state private, you can encapsulate the state and the logic that manipulates it within a single component. This can make your component more self-contained and easier to test. 
+
+**```Conclusion```**: Use as much privately declared state, this is better for UI rendering, in rare case if it require to share single state among multiple component then use lifting state up method.
+
+
+### **```useEffect```** hook
 ```javascript
 useEffect(() => {
     /// your codes
@@ -303,8 +399,12 @@ The_redirects file is used to handle client-side routing in a single-page React 
 
 > # ```React Event Handler```
 
-&nbsp;
+### **```onKeyDown```** event handler
+The onkeydown event in JavaScript occurs when a key on the keyboard is pressed down.
 
+> If a user presses and holds the 'Enter' key, the onKeyDown event is fired immediately. It fires for 'Enter' key, including function keys and special keys like Shift and Alt, doesn't mean that you've also pressed the 'Alt' key. It's just that the altKey property is part of the event object and will be logged regardless of whether the 'Alt' key was actually pressed. 
+
+&nbsp;
 
 > # ```React Classnames library```
 
