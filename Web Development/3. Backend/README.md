@@ -2,15 +2,21 @@
 
 Backend development comprises **database** and **server**.
 
+- Node.js is single threaded but non-blocking.
+
 Modules in Node.js: Modules are functions and there are three types of modules available in node js,
 
 1. Built in modules
 2. Third party modules (install via NPM js)
 3. File based modules
 
+&nbsp;
+
 > # **```NPM commands```**
 
 flag ```-g```: describes package to install globally.
+
+&nbsp;
 
 > # ```Working with Express.js```
 
@@ -65,22 +71,29 @@ But, you can change the long command by do the following:
 
 We can change our port as our preference by specifying the port number as an argument to the listen() method.
 
-```
-/// require express to use it
-const express = require('express');
+``` jsx
+/// import express module to utilize 
+import express from "express";
 const app = express();
-
+const CORS = require("cors");
 /// Your application will serve at http://localhost:PORT
-const PORT = 4000;
+/// process.env.PORT is a variable where port value is declared in .env file, it is a good practice to store credentials like port in .evn file
+const PORT = process.env.PORT || 5500;
 
-app.listen(PORT, () => {
-    console.log(`Server is running on ${PORT}`);
+app.get("/", (req, res) => {
+    res.send("Hello World!");
+});
+
+app.use(CORS());
+
+app.listen(port, () => {
+    console.log(`Server running at port ${PORT}`);
 });
 ```
 
 To execute the aforementioned application, carry out step 4 of **Create Express.js Project**.
 
-> ## **Error**
+## **```Error```**
 
 <ins>Error message:</ins> **..\nodemon.ps1 cannot be loaded because running scripts is disabled on this system.**  
 
@@ -95,7 +108,21 @@ Other Notes:
 
 &nbsp;
 
-> ## **Modules**
+## **```CORS Error```**
+
+## **```POST Request```**
+POST request মানে হচ্ছে client থেকে server এ কোন data পাঠানো, যেমন কোন form submit করলে user এর submitted data server এ যায় । 
+
+<details>
+<summary>Steps</summary>
+1. By default or implicitly every request sent as 'GET' request in node js.
+2. Use fetch with method POST.
+3. Add  headers to the fetch. "content-type": "application/json"
+4. Add body to the fetch to send data and make sure to use JSON.stringify to send data.
+5. Make sure adding this line: app.use(express.json())
+</details>
+
+## **```Modules```**
 
 Modules are simply functions.
 
@@ -112,5 +139,3 @@ const moduleC = "moduleC";
 
 export {moduleA,moduleB,moduleC};
 ```
-
-## **fs module**

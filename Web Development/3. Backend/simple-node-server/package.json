@@ -1,16 +1,16 @@
 {
-  "name": "first_backend",
+  "name": "simple-node-server",
   "version": "1.0.0",
-  "description": "First ever backend in express",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
-
-  "author": "Subodh Chandra Shil",
+  "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "nodemon": "^3.0.2"
   }
