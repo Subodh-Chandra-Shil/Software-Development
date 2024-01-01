@@ -11,30 +11,28 @@ function App() {
             .then((DATA) => setUser(DATA));
     }, []);
 
-    const handleAddUser = (e) => {
-        e.preventDefault();
-        const name = e.target.name.value;
-        const age = e.target.email.value;
-        const user = { name, age };
-        console.log(name, age);
+    const handleAddUser = (event) => {
+        event.preventDefault();
+        const name = event.target.name.value;
+        const email = event.target.email.value;
+        const user = { name, email };
 
-        fetch("http://localhost:5500/users", {
-            method: "POST",
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
             headers: {
-                "content-type": "application/json"
+                'content-type': 'application/json',
             },
             body: JSON.stringify(user)
         })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
+            .then(res => res.json())
+            .then(data => {
                 const newUsers = [...users, data];
                 setUser(newUsers);
             })
-            .catch((err) => console.log(err));
+            .catch(err => console.error(err))
 
-        e.target.reset();
-    };
+        event.target.reset();
+    }
 
     return (
         <div>
@@ -65,6 +63,7 @@ function App() {
                 <br />
                 <button type="submit">Add User</button>
             </form>
+
         </div>
     );
 }

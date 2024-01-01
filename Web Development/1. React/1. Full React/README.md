@@ -172,6 +172,10 @@ The htmlFor attribute is used to associate a label with an input element.
 
 ## **```Props in React```**
 Props (Short form of properties) are way to pass parent to child.
+- Passed into a component from it's parent.
+- Read-only (immuteable) within the receiving component.
+- Allow parent-to-child component communication.
+- 
 
 ## **```Passing component as props (Children props)```**
 > We can easily import and use a component in another component, but as per react good practices one should use **children props** to do so with additional benefits.
@@ -300,6 +304,9 @@ State in React refers to the dynamic and interactive data that can change over t
 - State is local and private to the component.
 - State changes cause the component or specific part of a component to re-render.
 - To handle state in functional component 
+- State is muteable.
+- Causes re-render when updated.
+- Managed using **useState** in functional components.
 
 &nbsp;
 
@@ -352,6 +359,37 @@ export default Example;
 ```
 
 - States are associated with events. To change a state an event needs to be triggered.  
+
+## **```Declaring empty useState```**
+
+If you want to initialize a state variable that will eventually hold a string, you can initialize it as an empty string:
+
+```javascript
+const [text, setText] = useState('');
+```
+
+If you want to initialize a state variable that will eventually hold a number, you can initialize it as `0` or `null`:
+
+```javascript
+const [count, setCount] = useState(0);
+// or
+const [count, setCount] = useState(null);
+```
+
+If you want to initialize a state variable that will eventually hold an array, you can initialize it as an empty array:
+
+```javascript
+const [items, setItems] = useState([]);
+```
+
+If you want to initialize a state variable that will eventually hold an object, you can initialize it as an empty object:
+
+```javascript
+const [user, setUser] = useState({});
+```
+
+### **```Caution```**
+Never declare empty useState in this way, ```const [text, setText] = useState();```, this will set the initial value as **'undefined'**. 
 
 ## **```Declaring state```**
 The decision to declare state in a component's closest parent or privately in the component itself largely depends on the specific requirements of your application. Both approaches have their own advantages and use cases.
@@ -412,6 +450,11 @@ You can reuse css classes by using this library additionally handle  classes wit
 
 > # ```React Forms```
 
+The value attribute in an ```<input>``` tag in HTML specifies the initial value of the input element. 
+
+```jsx
+<input type="text" value="Initial Text">
+```
 The onsubmit should be called from forms.
 
 ### **```input tag "name" attribute```**

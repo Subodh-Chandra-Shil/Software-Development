@@ -10,8 +10,8 @@ import { Calculator } from "./components/Project3-calculator/Calculator";
 function App() {
     return (
         <>
-            {/*  Practices */}
-            <Practice1 child={<Calculator />} />
+            {/* Practices */}
+            {/* <Practice1 child={<Calculator />} /> */}
 
             {/* <Counter /> */}
             {/* <Card userName="Subodh" post="Junior Software Engineer" /> */}
@@ -19,7 +19,6 @@ function App() {
             {/* <Background_color_changer /> */}
             {/* <Password_generator /> */}
             {/* <Currency_converter /> */}
-
             {/* <Calculator /> */}
         </>
     );

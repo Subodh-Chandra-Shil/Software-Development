@@ -115,8 +115,9 @@ POST request মানে হচ্ছে client থেকে server এ কো�
 
 <details>
 <summary>Steps</summary>
-1. By default or implicitly every request sent as 'GET' request in node js.
-2. Use fetch with method POST.
+
+1. By default or implicitly every request sent as 'GET' request in node js.  
+2. Use fetch with method POST.  
 3. Add  headers to the fetch. "content-type": "application/json"
 4. Add body to the fetch to send data and make sure to use JSON.stringify to send data.
 5. Make sure adding this line: app.use(express.json())
@@ -139,3 +140,18 @@ const moduleC = "moduleC";
 
 export {moduleA,moduleB,moduleC};
 ```
+
+## **```When to use NoSQL```**
+- Suitable for data heavy application and scalability (popular for horizontal it's scalability model).
+- NoSQL databases are designed to handle unstructured data.
+- User for encouraging application paradigm like microservices and real-time streaming.
+- If the service requires a scale-out architecture.
+- Optimized for specific data types, often offering faster read/write speeds for certain queries.
+- Has rich features like: indexing, aggregation, file store, etc.
+
+## **```CRUD Operations```**
+1. C = Create
+2. R = Read
+3. U = Update
+4. D = Delete
+
