@@ -8,9 +8,10 @@ You know every technology comes into big picture and public attention must have 
 1. React Virtual DOM
 
 
-## **```Updating values in the UI real-time```**
+## **```Updating values in the UI real-time (How react rendering works)```**
 React uses a solution called state, it fixes the reload issue everytime the UI update or adds new data. The state feature in React makes a webapp truly SPA (Single Page Application). Simple term, it re-render specific portion without even reloading.
 
+React uses reconciliation process to handle UI changes. React has it's own version of DOM called **Virtual-DOM**, the which is a lightweight replication of the actual DOM. To UI update, React don't works on actual in-browser DOM, rather changes or updates are made on virtual DOM itself. React then compares current and previous versions of the virtual DOM and append the specific updated nodes in the browser DOM. 
 
 ## **```Some React extensions (for VS Code)```**
 1. html to JSX
@@ -420,14 +421,85 @@ Sometimes, it's better to keep the state private within a component. This is the
 
 **```Conclusion```**: Use as much privately declared state, this is better for UI rendering, in rare case if it require to share single state among multiple component then use lifting state up method.
 
+## **Updating state from previous state**
 
-### **```useEffect```** hook
+### Spread operator
+Consider cloning of previous array or object elements along with new items using spread operator. This will maintain immutability when updating arrays or objects. 
+
+```jsx
+const newUserData = [...userData, newData];
+```
+
+### Functional updates
+Use, ```(previousData) => [...previousData, newData]``` to avoid state values during asynchronous updates. 
+
+Sometimes it requires updating the state based on the previous state value. Most developers do this in the following way:
+
+```jsx
+import { useState } from "react";
+
+export default function Counter() {
+  const [value, setValue] = useState(0);
+
+  const handleValue = () => {
+    /// bad practice ❌❌
+    setValue(value + 1);
+  };
+
+  return (
+    <div>
+      <h1>Counter App</h1>
+      <h3>Value: {value}</h3>
+      <button onClick={handleValue}>Add</button>
+    </div>
+  );
+}
+
+```
+The example demonstrates a counter app, where we need to add 1 in each button click, this needs the previous value to be updated.	
+
+Here how to do this is recommended way, 
+```jsx
+import { useState } from "react";
+
+export default function Counter() {
+  const [value, setValue] = useState(0);
+
+  const handleValue = () => {
+    /// good practice ✅✅
+    setValue((value) => value + 1);
+  };
+
+  return (
+    <div>
+      <h1>Counter App</h1>
+      <h3>Value: {value}</h3>
+      <button onClick={handleValue}>Add</button>
+    </div>
+  );
+}
+```
+
+## **```useEffect```** hook
 ```javascript
 useEffect(() => {
     /// your codes
 }, [dependencies]);
 ```
 With useEffect a component re-render every time it's dependency changes. 
+
+## **```useRef``` hook**
+
+The useRef hook is a special hook that is used for accessing actual DOM tree in the browser. Ref refers to reference of a DOM element. 
+
+Purpose or usecase:
+1. Using state without re-rendering.
+2. Can retain previous state or prop values.
+
+Traits:
+
+When not to use useRef:
+1. Avoid using useRef to show some value in UI, so don't useRefValue.current to show vlaues in UI.
 
 > # ```Context API```
 
@@ -457,11 +529,52 @@ The value attribute in an ```<input>``` tag in HTML specifies the initial value 
 ```
 The onsubmit should be called from forms.
 
+### **```Button type```**
+In a form, if you don't provide any value for the button **type** attribute, it will implicitly initialize type attribute with the value "submit", the "submit" type responsible for collecting data from input fields and provide it to server. 
+
+Button with no explicit type is cosidered as a bad practice, since it reload the entire page. To avoid this we have to invoke or call **```event.preventDefault()```** method in the onSubmit method of a form tag. 
+
+```jsx
+// Always do this!!
+
+    const handleAddUser = (event) => {
+        event.preventDefault();
+        /// other codes...
+        event.target.reset();
+    }
+
+  <form onSubmit={handleAddUser} action="">
+      <input
+          typeF="text"
+          name="name"
+          id=""
+          placeholder="Enter your name"
+          required
+      />
+  </form>
+```
+
 ### **```input tag "name" attribute```**
 The name attribute in an input tag in React is used to identify the form field that gets get its value submitted with the form. It specifies the name for the input that's submitted with the form. But, Each input element within a form should have a unique name to avoid conflicts in submitted data.
-
 
 
 > # **```React TypeScript```**
 
 TypeScript Tuples:
+
+
+> # **```Important libraries and packages```**
+
+## **```uuid react```**
+
+```jsx
+/// install command
+npm install uuid
+
+/// how to use in react
+import { v4 as uuidv4 } from 'uuid';
+
+const id = uuidv4();
+console.log(id);
+
+```

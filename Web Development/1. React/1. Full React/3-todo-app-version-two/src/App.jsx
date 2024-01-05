@@ -4,6 +4,7 @@ import TodoItems from "./components/TodoItems";
 import "./App.css";
 import { useState } from "react";
 import { WelcomeMessage } from "./components/WelcomeMessage";
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
 
@@ -12,11 +13,19 @@ function App() {
 
     const handleNewItem = (itemName, itemDueDate) => {
         console.log(`New item added: ${itemName} Date: ${itemDueDate}`);
-        const newTodoItems = [...todoItems, { name: itemName, dueDate: itemDueDate }];
+        let uid = uuidv4();
+
+        while (todoItems.some(item => item.id === uid)) {
+            uid = uuidv4();
+        }
+
+        const newTodoItems = [...todoItems, { name: itemName, dueDate: itemDueDate, todoID: uid }];
         setTodoItems(newTodoItems);
     };
 
-    const handleDeleteItem = (todoItemName) => {
+    const handleDeleteItem = (todoID) => {
+        const newTodoItems = todoItems.filter(item => item.todoID !== todoID);
+        setTodoItems(newTodoItems);
         console.log(`Item deleted: ${todoItemName}`);
     }
 
