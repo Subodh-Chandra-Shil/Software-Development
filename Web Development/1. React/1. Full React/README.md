@@ -430,6 +430,16 @@ Consider cloning of previous array or object elements along with new items using
 const newUserData = [...userData, newData];
 ```
 
+```jsx
+const newTodoItems = [...todoItems, { name: itemName, dueDate: itemDueDate, todoID: uid }];
+
+/// Not a good way to updating state using previous value
+// setTodoItems(newTodoItems);
+
+/// good practice ✅✅
+setTodoItems((currentValue) => [...currentValue, { name: itemName, dueDate: itemDueDate, todoID: uid }]);
+```
+
 ### Functional updates
 Use, ```(previousData) => [...previousData, newData]``` to avoid state values during asynchronous updates. 
 
@@ -502,6 +512,20 @@ When not to use useRef:
 1. Avoid using useRef to show some value in UI, so don't useRefValue.current to show vlaues in UI.
 
 > # ```Context API```
+
+A react app (or any frontend architecture) always has the concept of components that are similar in look different in data. As for React the data is here may be passed via props. Suppose we have a parent component containing one or more child components, that child component may have it's child and so forth. If we would like to pass data from a parent to a child then we need to pass the props all the way down to that inner or child component, this is called the props drilling. 
+
+### Drawbacks of **props drilling**
+1. Context API solves the props drilling problem in a React app. When the component tree is big or deepness is huge and we want to pass data using props to a child placed deep then it creates complexity and refactoring in the component tree or debugging becomes more of a headache. Context API creates a centralized route to pass data from the parent to any level of the child component. 
+
+### Folder steup 
+- Create a store folder to store context files. 
+- 
+
+
+### Usecase
+1. To avoid props drilling complexity.
+2. To globally share states that may be used by multiple components. 
 
 ### **"_redirects" file**
 
