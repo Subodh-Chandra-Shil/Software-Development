@@ -1,6 +1,10 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+import { TodoItemsContext } from "../store/todo-item-store";
 
-function AddTodo({ onNewItem }) {
+function AddTodo() {
+    const contextObj = useContext(TodoItemsContext);
+    const onNewItem = contextObj.addNewItem;
+
     // const [todoName, setTodoName] = useState("");
     // const [dueDate, setDueDate] = useState("");
     const todoNameElement = useRef(null);
@@ -32,10 +36,9 @@ function AddTodo({ onNewItem }) {
         dueDateElement.current.value = "";
 
         if (todoName === "" || dueDate === "")
-            return console.error('give some input');
-        else
-            onNewItem(todoName, dueDate);
-    }
+            return console.error("give some input");
+        else onNewItem(todoName, dueDate);
+    };
 
     return (
         <div className="container text-center">
@@ -45,8 +48,8 @@ function AddTodo({ onNewItem }) {
                         ref={todoNameElement}
                         type="text"
                         placeholder="Enter Todo Here"
-                    // value={todoName}
-                    // onChange={handleNameChange}
+                        // value={todoName}
+                        // onChange={handleNameChange}
                     />
                 </div>
 
@@ -54,8 +57,8 @@ function AddTodo({ onNewItem }) {
                     <input
                         ref={dueDateElement}
                         type="date"
-                    // value={dueDate}
-                    // onChange={handleDateChange}
+                        // value={dueDate}
+                        // onChange={handleDateChange}
                     />
                 </div>
 

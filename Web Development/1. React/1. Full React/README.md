@@ -515,17 +515,29 @@ When not to use useRef:
 
 A react app (or any frontend architecture) always has the concept of components that are similar in look different in data. As for React the data is here may be passed via props. Suppose we have a parent component containing one or more child components, that child component may have it's child and so forth. If we would like to pass data from a parent to a child then we need to pass the props all the way down to that inner or child component, this is called the props drilling. 
 
+> ### ```The Context API allows us to create global state variables in a parent component can be consumed by it's child component.```
+
 ### Drawbacks of **props drilling**
 1. Context API solves the props drilling problem in a React app. When the component tree is big or deepness is huge and we want to pass data using props to a child placed deep then it creates complexity and refactoring in the component tree or debugging becomes more of a headache. Context API creates a centralized route to pass data from the parent to any level of the child component. 
 
 ### Folder steup 
 - Create a store folder to store context files. 
-- 
-
 
 ### Usecase
 1. To avoid props drilling complexity.
-2. To globally share states that may be used by multiple components. 
+2. To globally share states that may be used by multiple components.
+3. Props can reduce code readability and maintain clean code. Using less props with components make it easy read it. 
+
+### Caution
+1. Everything wrapped within the Context API provider re-render each time the value is changed.
+2. Always use object in the value property. 
+   ```jsx
+      <TodoItemsContext.Provider value={{todoItems, addNewItem, deleteItem}}>
+
+      {/* Child components */}
+
+      </TodoItemsContext.Provider>
+   ```
 
 ### **"_redirects" file**
 
