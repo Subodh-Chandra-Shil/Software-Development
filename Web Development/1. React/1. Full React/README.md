@@ -511,6 +511,47 @@ Traits:
 When not to use useRef:
 1. Avoid using useRef to show some value in UI, so don't useRefValue.current to show vlaues in UI.
 
+&nbsp;
+
+> # **```useReducer``` hook**
+
+A simple counter app using ```useReducer``` hook.
+
+```jsx
+import { useReducer } from "react";
+
+const reducer = (state, action) => {
+  switch (action) {
+    case "increment":
+      return state + 1;
+    case "decrement":
+      if (state === 0) return 0;
+      return state - 1;
+    default:
+      return state;
+  }
+};
+
+export default function UseReducerCounter() {
+  const [count, dispatch] = useReducer(reducer, (initialState = 5));
+
+  return (
+    <div>
+      <div>Count: {count}</div>
+
+      <button type="button" onClick={() => dispatch("increment")}>
+        Increment
+      </button>
+
+      <button type="button" onClick={() => dispatch("decrement")}>
+        Decrement
+      </button>
+    </div>
+  );
+}
+
+```
+
 > # ```Context API```
 
 A react app (or any frontend architecture) always has the concept of components that are similar in look different in data. As for React the data is here may be passed via props. Suppose we have a parent component containing one or more child components, that child component may have it's child and so forth. If we would like to pass data from a parent to a child then we need to pass the props all the way down to that inner or child component, this is called the props drilling. 

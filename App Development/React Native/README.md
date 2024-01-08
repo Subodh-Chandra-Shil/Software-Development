@@ -12,3 +12,4 @@ To write text one must use <Text></Text> and if there are multiple text lines wr
 
 Every string or textual data should be written within this tag. 
 
+### ```<Button></Button>```
