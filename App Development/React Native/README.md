@@ -1,3 +1,7 @@
+> React Native transpiles it's all built-in components like, View, Text, Button into native OS widgets. For example, the View component transpiles into UIView (for iOS) and Android View (for Android OS)
+
+> 
+
 ### ```<View></View>```
 
 The ```<View>``` is a react-native component that wraps all elements in a ```<div>``` like container. 
